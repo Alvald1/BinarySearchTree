@@ -28,6 +28,7 @@ void tree_postorder(Tree* tree);
 void tree_inorder_rec(Node* node);
 void tree_preorder_rec(Node* node);
 void tree_postorder_rec(Node* node);
+void tree_postorder_morris(Tree* tree);
 
 int
 tree_search(Tree* tree, int key, Node** result) {
