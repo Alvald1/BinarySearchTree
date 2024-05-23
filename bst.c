@@ -190,3 +190,50 @@ void
 tree_preorder(Tree* tree) {
     tree_preorder_rec(tree->root);
 }
+
+void
+tree_postorder_morris(Tree* tree) {
+    Node* current = NULL;
+    Node *previous = NULL, *predecessor = NULL;
+    Node *successor = NULL, *temp = NULL;
+    if (tree->root == NULL) {
+        return;
+    }
+    current = malloc(sizeof(Node));
+    current->left = tree->root;
+    while (current != NULL) {
+        if (current->left == NULL) {
+            current = current->right;
+        } else {
+            predecessor = current->left;
+            while (predecessor->right != NULL && predecessor->right != current) {
+                predecessor = predecessor->right;
+            }
+            if (predecessor->right == NULL) {
+                predecessor->right = current;
+                current = current->left;
+            } else {
+                predecessor->right = NULL;
+                successor = current;
+                current = current->left;
+                previous = NULL;
+                while (current != NULL) {
+                    temp = current->right;
+                    current->right = previous;
+                    previous = current;
+                    current = temp;
+                }
+                while (previous != NULL) {
+                    temp = previous->right;
+                    previous->right = current;
+                    current = previous;
+                    printf("%d ", previous->key);
+                    previous = temp;
+                }
+                current = successor;
+                current = current->right;
+            }
+        }
+    }
+    free(successor);
+}
