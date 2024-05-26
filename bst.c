@@ -95,7 +95,7 @@ tree_successor(Node* node) {
         return node_minimum(node->right);
     }
     Node* successor = node->parent;
-    while (successor != NULL && node != successor->right) {
+    while (successor != NULL && node == successor->right) {
         node = successor;
         successor = successor->parent;
     }
@@ -116,7 +116,7 @@ tree_predecessor(Node* node) {
         return node_maximum(node->left);
     }
     Node* predecessor = node->parent;
-    while (predecessor != NULL && node != predecessor->left) {
+    while (predecessor != NULL && node == predecessor->left) {
         node = predecessor;
         predecessor = predecessor->parent;
     }
